@@ -20,6 +20,7 @@ h1,h3 {
 .title {
     font-size: 62px;
     margin-bottom: 0px;
+    margin-top: 0px;
 }
 
 #restartButton{
@@ -28,5 +29,5 @@ h1,h3 {
 }
 
 #restartButton:hover {
-    background-color: 0;
+    background-color: #232323;
 }
