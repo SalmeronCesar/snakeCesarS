@@ -16,6 +16,7 @@ var screenHeight;
 var gameState;
 var gameOverMenu;
 var restartButton;
+var playHUD;
 /* -----------------------------------------------------------------------------
  *  Executing Game Code
  * -----------------------------------------------------------------------------
@@ -44,6 +45,8 @@ function gameInitialize() {
     
     restartButton = document.getElementById("restartButton");
     restartButton.addEventListener("click", gameRestart);
+    
+    playHUD = document.getElementById("playHUD");
 
     setState("PLAY");
 }
@@ -111,6 +114,7 @@ function snakeUpdate() {
     }
     checkFoodCollisions(snakeHeadX, snakeHeadY);
     checkWallCollisions(snakeHeadX, snakeHeadY);
+    checkSnakeCollisions(snakeHeadX, snakeHeadY);
 
     var snakeTail = snake.pop();
     snakeTail.x = snakeHeadX;
@@ -188,8 +192,13 @@ function checkWallCollisions(snakeHeadX, snakeHeadY) {
     }
 }
 
-function checkSnakeCollisions() {
-    
+function checkSnakeCollisions(snakeHeadX, snakeHeadY) {
+    for(var index = 1; index < snake.length; index++) {
+        if(snakeHeadX == snake[index].x && snakeHeadY == snake[index].y) {
+            setState("GAME OVER");
+            return;
+        }
+    }
 }
 
 /* -----------------------------------------------------------------------------
@@ -219,9 +228,12 @@ function showMenu(state) {
     if (state == "GAME OVER") {
         displayMenu(gameOverMenu);
     }
+    else if(state == "PLAY") {
+        displayMenu(playHUD);
+    }
 }
 
 function centerMenuPosition(menu) {
-    menu.style.top = (screenHeight / 2) - (menu.offsetHeight) + "px";
-    menu.style.left = (screenWidth / 2) - (menu.offsetWidth) + "px";
+    menu.style.top = (screenHeight / 2) - (menu.offsetHeight/2) + "px";
+    menu.style.left = (screenWidth / 2) - (menu.offsetWidth/2) + "px";
 }
