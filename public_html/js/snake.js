@@ -18,6 +18,7 @@ var gameOverMenu;
 var restartButton;
 var playHUD;
 var scoreboard;
+var cw = 10;
 /* -----------------------------------------------------------------------------
  *  Executing Game Code
  * -----------------------------------------------------------------------------
@@ -243,4 +244,13 @@ function centerMenuPosition(menu) {
 
 function drawScoreboard() {
     scoreboard.innerHTML = "Length: " + snakeLength;
+}
+/*This was me trying to put segments on the snake*/
+{
+    var cw = snake_array[i];
+    //Lets paint 10px wide cells
+    ctx.fillStyle = "black";
+    ctx.fillRect(c.x * cw, c.y * cw, cw, cw);
+    ctx.strokeStyle = "white";
+    ctx.strokeRect(c.x * cw, c.y * cw, cw, cw);
 }
